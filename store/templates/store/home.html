@@ -1,0 +1,55 @@
+{% extends 'store/basic.html' %}
+{% block title %}Home{% endblock %}
+{% block style %}
+<style>
+    .card-img-top {
+    height: 200px;
+    object-fit: contain;
+    width: 100%;
+    }
+    .category{
+        color: #60395e;
+    }
+</style>
+{% endblock %}
+{% block body %}
+
+<!-- Carousel section -->
+<div class="container my-3">
+    {% for category, chunks in allProds %}
+    <h3 class="category my-3">{{ category|capfirst }}</h3>
+
+
+    <div id="carousel{{ forloop.counter }}" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            {% for chunk in chunks %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="row">
+                    {% for product in chunk %}
+                    <div class="col-md-3">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name|slice:"0:20" }}...</h5>
+                           <p class="card-text"><b>Rs. </b>{{ product.price }}</p>
+                            <a href="productdetails/{{product.id}}" class="btn btn-primary">View Product</a>
+                            </div>
+                        </div>
+                </div>
+               {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Controls -->
+        <a class="carousel-control-prev" href="#carousel{{ forloop.counter }}" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#carousel{{ forloop.counter }}" role="button" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

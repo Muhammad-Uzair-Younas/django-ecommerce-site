@@ -1,0 +1,36 @@
+{% extends 'store/basic.html' %}
+{% block title %}{{products.0.name}}{% endblock %}
+{% block body %}
+
+
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <img src="{{products.0.image.url}}" width="220px" height="220px" alt="hello">
+            
+        </div>
+    
+    <div class="col-md-8 my-3">
+        <h3>{{products.0.name}}</h3>
+        <h6>Price: <b>Rs. {{products.0.price}}</b></h6>
+        <h6>Brand: <b>{{products.0.brand}}</b></h6>
+        <h6>Category: <b>{{products.0.category}}</b></h6>
+        {% if products.0.stock > 0 %}
+        <h6>Stock: <b>{{products.0.stock}}</b></h6>
+        {% else %}
+        <h6>Product is out of stock</h6>
+        {% endif %}
+    </div>
+    <div class="row my-2">
+        <button type="button" class="btn btn-success mx-5 w-auto">Buy Now</button>
+        <button type="button" class="btn btn-success w-auto">Add to Cart</button>
+    </div>
+    </div>
+    <div class="container my-3">
+        <div class="col-md-10">
+        <h4>Description</h4>
+        <p>{{products.0.description|linebreaks}} </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

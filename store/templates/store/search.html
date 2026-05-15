@@ -1,0 +1,40 @@
+{% extends 'store/basic.html' %}
+{% block title %}productlisting{% endblock %}
+{% block body %}
+<style>
+  .card-img-top {
+    height: 200px;
+    object-fit: contain;
+    width: 100%;
+  }
+  .unmatched{
+    color:#60395e;
+  }
+</style>
+<div class="container my-3">
+  <div class="unmatched row">
+    {% if searched_products|length == 0 %}
+    <div class="col-md-12 mt-4"><h6>Your search: <b>{{query}}</b> did not match any document.</h6></div>
+    <ul>
+        <li><h6>Try another keyword.</h6></li>
+        <li><h6>Try more general keyword.</h6></li>
+    </ul>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    {% else %}
+    {% for product in searched_products %}
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div class="card">
+                  <img class="card-img-top mx-auto" src="{{product.image.url}}" alt="heloo">
+                  <div class="card-body">
+                    <h5 class="card-title">{{product.name|slice:"0:20"}}...</h5>
+                    <p class="card-text">{{product.price}}</p>
+                    <a href="/productdetails/{{product.id}}" class="btn btn-primary">View Product</a>
+                  </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
